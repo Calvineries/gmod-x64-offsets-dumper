@@ -1,9 +1,6 @@
 from pymem import Pymem, process, pattern
 
-
-print("Instructions: Rejoindre map solo, fait spawn 1 bot, faire -attack et -jump")
-#print("(pour le screengrab, aller sur mon serv, faire un screengrab, attendre qu'il soit fini, puis lancer le script)")
-print("")
+print("...")
 def get_sig(module_name, _pattern):
     memory = Pymem("gmod.exe")
     module = process.module_from_name(memory.process_handle, module_name)
