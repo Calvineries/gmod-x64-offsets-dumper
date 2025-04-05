@@ -11,4 +11,5 @@ Can be used to update the offsets of my external cheat: https://github.com/Calvi
 To get somes pointers:
 1) Join a server.
 2) Start this script again.
-3) Done! You have now the Crosshair, SteamID and PlayerName offsets.
+3) Done! You have now the Crosshair, SteamID and PlayerName offsets.  
+Be careful, most of the other addresses are wrong.
