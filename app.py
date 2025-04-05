@@ -2,11 +2,17 @@ from pymem import Pymem, process, pattern
 
 print("...")
 def get_sig(module_name, _pattern):
-    memory = Pymem("gmod.exe")
-    module = process.module_from_name(memory.process_handle, module_name)
-    result = pattern.pattern_scan_module(memory.process_handle, module, _pattern)
-    result += 0 - module.lpBaseOfDll
-    return result
+    if module_name != 'all':
+        memory = Pymem("gmod.exe")
+        module = process.module_from_name(memory.process_handle, module_name)
+        result = pattern.pattern_scan_module(memory.process_handle, module, _pattern)
+        result += 0 - module.lpBaseOfDll
+        return result
+    else:
+        memory = Pymem("gmod.exe")
+        result = pattern.pattern_scan_all(memory.process_handle, _pattern)
+        result += 0
+        return result
 
 
 try:
@@ -34,6 +40,15 @@ try:
 except Exception as err:
     pass
 
+try:
+    steam_id_pointer = get_sig('all', rb'\x53\x54\x45\x41\x4D\x5F\x30\x3A.\x3A.........\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xF9\x3E\x77\x13\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1A\xC7\x55\xDA\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00..........\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+    memory = Pymem("gmod.exe")
+    client_dll = process.module_from_name(memory.process_handle, 'client.dll').lpBaseOfDll
+    base = memory.read_longlong(client_dll + dwLocalPlayer)
+    localplayer_pointer = steam_id_pointer - base
+except Exception as err:
+    pass
+
 
 try:
     print("dwLocalPlayer:", hex(dwLocalPlayer))
@@ -58,4 +73,16 @@ except Exception as err:
 try:
     print("mat_fullbright:", hex(mat_fullbright))
 except Exception as err:
+    pass
+try:
+    if localplayer_pointer < 0x9000:
+        print("")
+        print("LocalPlayer Pointers:")
+        print("- SteamID:", hex(localplayer_pointer))
+        print("- Playername:", hex(localplayer_pointer - 0x84))
+        print("- Crosshair:", hex(localplayer_pointer - 0xC8))
+    else:
+        print("You must be connected to a server to get the pointers.")
+except Exception as err:
+    print("You must be connected to a server to get the pointers.")
     pass
