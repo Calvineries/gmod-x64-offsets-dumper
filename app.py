@@ -76,13 +76,13 @@ except Exception as err:
     pass
 try:
     if localplayer_pointer < 0x9000:
-        print("")
-        print("LocalPlayer Pointers:")
+        print("\nLocalPlayer Pointers:")
         print("- SteamID:", hex(localplayer_pointer))
         print("- Playername:", hex(localplayer_pointer - 0x84))
         print("- Crosshair:", hex(localplayer_pointer - 0xC8))
     else:
-        print("You must be connected to a server to get the pointers.")
+        print("\nYou must be connected to a server to get the pointers.")
 except Exception as err:
-    print("You must be connected to a server to get the pointers.")
+    print("\nYou must be connected to a server to get the pointers.")
     pass
+
