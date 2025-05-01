@@ -4,9 +4,9 @@ Can be used to update the offsets of my external cheat: https://github.com/Calvi
 
 # Instructions:
 1) Close your game and then launch it, start a singleplayer game.
-2) Open your console and type once: bot, -attack and -jump
+2) Open your console and type once: bot and -jump
 3) Start this script.
-4) Done! You have now the LocalPlayer, EntityList, ViewMatrix, ForceAttack, ForceJump and MatFullbright offsets.  
+4) Done! You have now the LocalPlayer, EntityList, ViewMatrix, ForceJump and MatFullbright offsets.  
   
 To get somes pointers:
 1) Join a server.
