@@ -8,8 +8,8 @@ Can be used to update the offsets of my external cheat: https://github.com/Calvi
 3) Start this script.
 4) Done! You have now the LocalPlayer, EntityList, ViewMatrix, ForceJump and MatFullbright offsets.  
   
-To get somes pointers:
+If you don't get the pointers:
 1) Join a server.
 2) Start this script again.
 3) Done! You have now the Crosshair, SteamID and PlayerName offsets.  
-Be careful, most of the other addresses are wrong.
+Be careful, here most of the other addresses are wrong.
